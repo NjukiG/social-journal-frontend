@@ -6,17 +6,22 @@ import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Dashboard from "./components/Dashboard";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      Social Journal App...
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-        <Route path="dashboard" element={<Dashboard />} />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
 
         <Route path="*" element={<Error />} />
       </Routes>
