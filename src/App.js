@@ -11,6 +11,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import Footer from "./components/Footer";
 import Navbar2 from "./components/Navbar2";
 import Categories from "./pages/Categories";
+import CategoryForm from "./components/CategoryForm";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/create" element={<CategoryForm />} />
         </Route>
 
         <Route path="*" element={<Error />} />
