@@ -12,7 +12,7 @@ const Login = () => {
     if (user) {
       navigate("/dashboard");
     }
-  }, []);
+  }, [navigate, user]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,6 +25,13 @@ const Login = () => {
   return (
     <section className="relative flex flex-wrap lg:h-screen lg:items-center">
       <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+        <div class="flex justify-center mx-auto">
+          <img
+            class="w-auto h-7 sm:h-8"
+            src="https://img.icons8.com/?size=100&id=hQTLtNZ2H4Mx&format=png&color=000000"
+            alt=""
+          />
+        </div>
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Login to your account!
@@ -133,7 +140,7 @@ const Login = () => {
       <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
         <img
           alt=""
-          src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1620034949504-339c43e9cd56?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
