@@ -83,26 +83,6 @@ const Categories = () => {
                   </div>
                 </div>
               </article>
-
-              // <div className="w-full max-w-sm px-4 py-3 bg-white rounded-md shadow-md dark:bg-gray-800">
-              //   <div
-              //     key={categoryItem.ID}
-              //     class="flex items-center justify-between"
-              //   >
-              //     <span className="text-sm font-light text-gray-800 dark:text-gray-400">
-              //       Courses and MOOCs
-              //     </span>
-              //     <span className="px-3 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">
-              //       psychology
-              //     </span>
-              //   </div>
-
-              //   <div>
-              //     <h1 className="mt-2 text-lg font-semibold text-gray-800 dark:text-white">
-              //       {categoryItem.Title}
-              //     </h1>
-              //   </div>
-              // </div>
             );
           })}
         </div>

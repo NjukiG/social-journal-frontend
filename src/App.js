@@ -7,18 +7,18 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Dashboard from "./components/Dashboard";
 import PrivateRoutes from "./utils/PrivateRoutes";
-// import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Navbar2 from "./components/Navbar2";
+import Navbar from "./components/Navbar";
 import Categories from "./pages/Categories";
 import CategoryForm from "./components/CategoryForm";
+import CategoryDetails from "./components/CategoryDetails";
+import JournalForm from "./components/JournalForm";
+import Journals from "./pages/Journals";
 
 function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
-      
-      <Navbar2 />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -29,6 +29,12 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/create" element={<CategoryForm />} />
+          <Route path="/categories/:ID" element={<CategoryDetails />} />
+          <Route path="/journals" element={<Journals />} />
+          <Route
+            path="/categories/:ID/journals/create"
+            element={<JournalForm />}
+          />
         </Route>
 
         <Route path="*" element={<Error />} />
