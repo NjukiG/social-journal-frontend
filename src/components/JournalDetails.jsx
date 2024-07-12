@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const JournalDetails = () => {
   const { ID } = useParams();
   const [journalDetails, setJournalDetails] = useState({});
   const token = localStorage.getItem("token");
   if (!token) throw new Error("No token found");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/protected/journals/" + ID, {
@@ -30,14 +31,53 @@ const JournalDetails = () => {
       });
   }, [token, ID]);
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/protected/journals/${ID}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log("Journal deleted successfully");
+      navigate(`/journals`);
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+    }
+  };
+
+  if (!journalDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
       <div className="flex justify-end mb-4">
         <Link
+          className="inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
           to="/journals"
-          className="bg-green-500 text-white font-bold py-2 px-4 rounded"
         >
-          Back
+          <span className="sr-only"> Download </span>
+
+          <svg
+            className="size-5 rtl:rotate-180"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 8 14"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"
+            />
+          </svg>
         </Link>
       </div>
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -104,15 +144,15 @@ const JournalDetails = () => {
           Edit Journal
         </Link>
 
-        <Link
+        <button
+          onClick={handleDelete}
           to={`/journals/${journalDetails.ID}/delete`}
           className="bg-red-500 text-white font-bold py-2 px-4 rounded m-2"
         >
           Delete
-        </Link>
+        </button>
+        {/*  */}
       </div>
-
-      
     </div>
   );
 };

@@ -34,8 +34,8 @@ const CategoryDetails = () => {
       <div className="flex justify-end mb-4">
         <Link
           to={`/categories/${ID}/journals/create`}
-          className="bg-green-500 text-white font-bold py-2 px-4 rounded"
-        >
+          className="inline-flex items-center gap-2 rounded border border-indigo-600 bg-indigo-600 px-8 py-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+          >
           Add {catDetails.Title} +
         </Link>
       </div>
