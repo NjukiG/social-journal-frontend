@@ -64,9 +64,9 @@ const Registration = () => {
 
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl">
-            <div class="flex justify-center mx-auto">
+            <div className="flex justify-center mx-auto">
               <img
-                class="w-auto h-7 sm:h-8"
+                className="w-auto h-7 sm:h-8"
                 src="https://img.icons8.com/?size=100&id=hQTLtNZ2H4Mx&format=png&color=000000"
                 alt=""
               />

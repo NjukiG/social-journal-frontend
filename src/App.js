@@ -14,6 +14,8 @@ import CategoryForm from "./components/CategoryForm";
 import CategoryDetails from "./components/CategoryDetails";
 import JournalForm from "./components/JournalForm";
 import Journals from "./pages/Journals";
+import JournalDetails from "./components/JournalDetails";
+import EditJournal from "./components/EditJournal";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             path="/categories/:ID/journals/create"
             element={<JournalForm />}
           />
+          <Route path="/journals/:ID" element={<JournalDetails />} />
+          <Route path="/journals/:ID/edit" element={<EditJournal />} />
         </Route>
 
         <Route path="*" element={<Error />} />

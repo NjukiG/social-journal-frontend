@@ -1,17 +1,47 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-// import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const JournalForm = () => {
+const EditJournal = () => {
   const { ID } = useParams();
-
   const [formData, setFormData] = useState({
     Title: "",
     Content: "",
     ImageUrl: "",
   });
-
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found");
+
+  useEffect(() => {
+    const fetchJournalDetails = async () => {
+      try {
+        const response = await fetch(`/protected/journals/${ID}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        console.log(data.Journal);
+        setFormData({
+          Title: data.Journal.Title,
+          Content: data.Journal.Content,
+          ImageUrl: data.Journal.ImageUrl,
+        });
+      } catch (error) {
+        console.error("Error fetching journal details:", error);
+      }
+    };
+
+    fetchJournalDetails();
+  }, [ID, token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,12 +51,9 @@ const JournalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found");
-
     try {
-      const response = await fetch(`/protected/categories/${ID}/journals`, {
-        method: "POST",
+      const response = await fetch(`/protected/journals/${ID}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -39,34 +66,31 @@ const JournalForm = () => {
       }
 
       const data = await response.json();
-      console.log("Journal created successfully:", data);
-      navigate("/journals");
+      console.log("Journal updated successfully:", data);
+      navigate(`/journals/${ID}`);
     } catch (error) {
-      console.error("Error creating a journal:", error);
+      console.error("Error updating journal:", error);
     }
   };
-
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg"
       >
-        {/* This div below has the link to add class form */}
         <div className="flex justify-end mb-4">
-          <Link
-            to="/journals"
+          <button
+            onClick={() => navigate(`/journals/${ID}`)}
             className="bg-green-500 text-white font-bold py-2 px-4 rounded"
           >
             Back -
-          </Link>
+          </button>
         </div>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-lg font-semibold leading-7 text-gray-900">
-              Journal Information
+              Edit Journal Information
             </h2>
-
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-6">
                 <label
@@ -75,7 +99,7 @@ const JournalForm = () => {
                 >
                   Title
                 </label>
-                <div className="">
+                <div>
                   <input
                     type="text"
                     name="Title"
@@ -94,7 +118,7 @@ const JournalForm = () => {
                 >
                   Image URL
                 </label>
-                <div className="">
+                <div>
                   <input
                     type="text"
                     name="ImageUrl"
@@ -113,7 +137,7 @@ const JournalForm = () => {
                 >
                   Journal Content
                 </label>
-                <div className="">
+                <div>
                   <textarea
                     id="Content"
                     name="Content"
@@ -131,8 +155,8 @@ const JournalForm = () => {
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
-            onClick={() => navigate(`/journals`)}
             className="text-sm font-semibold leading-6 text-gray-900"
+            onClick={() => navigate(`/journals/${ID}`)}
           >
             Cancel
           </button>
@@ -148,4 +172,4 @@ const JournalForm = () => {
   );
 };
 
-export default JournalForm;
+export default EditJournal;

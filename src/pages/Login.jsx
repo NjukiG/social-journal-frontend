@@ -25,9 +25,9 @@ const Login = () => {
   return (
     <section className="relative flex flex-wrap lg:h-screen lg:items-center">
       <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-        <div class="flex justify-center mx-auto">
+        <div className="flex justify-center mx-auto">
           <img
-            class="w-auto h-7 sm:h-8"
+            className="w-auto h-7 sm:h-8"
             src="https://img.icons8.com/?size=100&id=hQTLtNZ2H4Mx&format=png&color=000000"
             alt=""
           />
